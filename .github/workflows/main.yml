@@ -1,0 +1,4 @@
+- name: Setup GraalPy
+  uses: actions/setup-python@v5
+  with:
+    python-version: graalpy # or graalpy24.0 to pin a version
