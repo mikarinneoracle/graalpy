@@ -11,6 +11,7 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
+      OCI_APP_OCID: ${{ secrets.OCI_APP_OCID }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -36,9 +37,6 @@ jobs:
     - name: Activate env
       run: |
         source ./bin/activate
-    - name: Cat func
-      run: |
-        cat src/func.py
     - name: Run GraalPy
       run: |
         graalpy -m standalone native \
@@ -53,14 +51,8 @@ jobs:
       run: |
         docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:latest .
         docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:latest
-    - name: Delete function
-      uses: oracle-actions/run-oci-cli-command@v1.2.0
-      with:
-        command: 'fn delete function testing demofunc'
-        silent: false
     - name: Create function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: 'fn create function testing demofunc fra.ocir.io/frsxwtjslf35/graalpyfunction:latest'
-        silent: false
+        command: 'oci fn function create --application-id ${{ secrets.OCI_APP_OCID }} --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:latest'
         
