@@ -23,3 +23,7 @@ jobs:
         id: login-ocir
         with:
           auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
+      - name: Build and Push graalpyfunction
+        run: |
+          docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:1.0 .
+          docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:1.0
