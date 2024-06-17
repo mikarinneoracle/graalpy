@@ -6,10 +6,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Show dir
-      run: |
-        pwd
-        ls
     - name: Setup GraalVM
       uses: graalvm/setup-graalvm@v1
       with:
@@ -34,7 +30,6 @@ jobs:
         source ./bin/activate
     - name: Show dir
       run: |
-        cd
         pwd
         ls
         cat src/func.py
