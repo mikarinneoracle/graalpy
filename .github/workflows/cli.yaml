@@ -18,4 +18,3 @@ jobs:
         with:
           command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
           silent: false
-      - run: echo ${{ secrets.OCI_CLI_USER }}
