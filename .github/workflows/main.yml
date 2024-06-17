@@ -14,11 +14,10 @@ jobs:
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
     - name: List functions
-        uses: oracle-actions/run-oci-cli-command@v1.2.0
-        id: list-functions
-        with:
-          command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
-          silent: false
+      uses: oracle-actions/run-oci-cli-command@v1.2.0
+      with:
+        command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+        silent: false
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup GraalVM
