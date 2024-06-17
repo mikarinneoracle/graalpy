@@ -26,9 +26,14 @@ jobs:
     - name: Activate env
       run: |
         source ./bin/activate
+    - name: show dir
+      run: |
+        pwd
+        ls
+        cat /func.py
     - name: Run GraalPy
       run: |
         graalpy -m standalone native \
         --output graalpyfunction \
-        --module /func.py \
+        --module func.py \
         --venv .
