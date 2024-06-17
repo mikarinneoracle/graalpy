@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: List functions
       run: |
-        oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}
+        oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }} --auth instance_principal
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup GraalVM
