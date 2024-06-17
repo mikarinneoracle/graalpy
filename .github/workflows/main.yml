@@ -63,5 +63,5 @@ jobs:
     - name: Create function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: "oci fn function create --application-id ${{ secrets.OCI_APP_OCID }} --memory-in-mbs 512 --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:$NOW"
+        command: "oci fn function create --application-id ${{ secrets.OCI_APP_OCID }} --memory-in-mbs 512 --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ NOW }}"
         
