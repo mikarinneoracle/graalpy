@@ -3,7 +3,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
     env:
       OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
       OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
@@ -12,7 +11,7 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
-      - name: Create function
-        uses: oracle-actions/run-oci-cli-command@v1.2.0
-        with:
-          command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+    - name: Create function
+      uses: oracle-actions/run-oci-cli-command@v1.2.0
+      with:
+        command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
