@@ -15,7 +15,6 @@ jobs:
       - name: List functions
         uses: oracle-actions/run-oci-cli-command@v1.2.0
         id: list-functions
-        silent : false
         #with:
         #  command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
       - run: echo ${{ secrets.OCI_CLI_USER }}
