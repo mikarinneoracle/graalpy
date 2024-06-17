@@ -1,0 +1,13 @@
+name: GraalPy-ocicli
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    #runs-on: self-hosted
+    env:
+      OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
+    steps:
+    - name: List functions
+      run: |
+        oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }} --auth instance_principal
+    
