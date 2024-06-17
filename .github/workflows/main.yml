@@ -12,11 +12,6 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
-    - name: List functions
-      uses: oracle-actions/run-oci-cli-command@v1.2.0
-      with:
-        command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
-        silent: false
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup GraalVM
@@ -50,3 +45,22 @@ jobs:
         --output graalpyfunction \
         --module src/func.py \
         --venv .
+    - name: Log into OCIR
+      uses: oracle-actions/login-ocir@v1.2.1
+      with:
+        auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
+    - name: Build and Push graalpyfunction
+      run: |
+        docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:latest .
+        docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:latest
+    - name: Delete function
+      uses: oracle-actions/run-oci-cli-command@v1.2.0
+      with:
+        command: 'fn delete function testing demofunc'
+        silent: false
+    - name: Create function
+      uses: oracle-actions/run-oci-cli-command@v1.2.0
+      with:
+        command: 'fn create function testing demofunc fra.ocir.io/frsxwtjslf35/graalpyfunction:latest'
+        silent: false
+        

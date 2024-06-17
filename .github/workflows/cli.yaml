@@ -18,12 +18,4 @@ jobs:
         with:
           command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
           silent: false
-      - name: Log into OCIR
-        uses: oracle-actions/login-ocir@v1.2.1
-        id: login-ocir
-        with:
-          auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
-      - name: Build and Push graalpyfunction
-        run: |
-          docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:1.0 .
-          docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:1.0
+      
