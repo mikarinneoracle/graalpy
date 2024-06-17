@@ -11,7 +11,40 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
-    - name: Create function
+    - name: List functions
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
         command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup GraalVM
+      uses: graalvm/setup-graalvm@v1
+      with:
+        java-version: '21'      # See 'Options' section below for all supported versions
+        distribution: 'graalvm' # See 'Options' section below for all available distributions
+        #github-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Versions
+      run: |
+        echo "GRAALVM_HOME: $GRAALVM_HOME"
+        echo "JAVA_HOME: $JAVA_HOME"
+        java --version
+        native-image --version
+    - name: Setup GraalPy
+      uses: actions/setup-python@v5
+      with:
+        python-version: graalpy24.0
+    - name: Set env
+      run: |
+        graalpy -m venv .
+    - name: Activate env
+      run: |
+        source ./bin/activate
+    - name: Cat func
+      run: |
+        cat src/func.py
+    - name: Run GraalPy
+      run: |
+        graalpy -m standalone native \
+        --output graalpyfunction \
+        --module src/func.py \
+        --venv .
