@@ -11,10 +11,10 @@ jobs:
     - name: Set env
       run: |
         graalpy -m venv .
-     - name: Activate env
+    - name: Activate env
       run: |
         source ./bin/activate
-      - name: Run GraalPy
+    - name: Run GraalPy
       run: |
         graalpy -m standalone native \
         --output graalpyfunction \
