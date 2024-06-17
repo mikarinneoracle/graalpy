@@ -8,7 +8,7 @@ jobs:
       run: |
         pwd
         ls
-        cat /src/func.py
+        cat src/func.py
     - name: Setup GraalVM
       uses: graalvm/setup-graalvm@v1
       with:
@@ -36,7 +36,7 @@ jobs:
         cd
         pwd
         ls
-        cat /src/func.py
+        cat src/func.py
     - name: Run GraalPy
       run: |
         graalpy -m standalone native \
