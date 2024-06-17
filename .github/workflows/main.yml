@@ -15,6 +15,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+    - name: List functions
+        uses: oracle-actions/run-oci-cli-command@v1.2.0
+        id: list-functions
+        with:
+          command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+          silent: false
     - name: Setup GraalVM
       uses: graalvm/setup-graalvm@v1
       with:
