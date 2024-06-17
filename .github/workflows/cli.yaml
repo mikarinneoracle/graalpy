@@ -18,3 +18,8 @@ jobs:
         with:
           command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
           silent: false
+      - name: Log into OCIR
+        uses: oracle-actions/login-ocir@v1.2.1
+        id: login-ocir
+        with:
+          auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
