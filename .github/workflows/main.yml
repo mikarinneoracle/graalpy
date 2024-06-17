@@ -13,6 +13,10 @@ jobs:
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
       OCI_APP_OCID: ${{ secrets.OCI_APP_OCID }}
     steps:
+    - name: Set current date as env variable
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      - name: Echo current date
+      run: echo ${{ NOW }}
     - name: Checkout code
       uses: actions/checkout@v4
     - name: List functions
@@ -54,10 +58,10 @@ jobs:
         auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
     - name: Build and Push graalpyfunction
       run: |
-        docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:latest .
-        docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:latest
+        docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ NOW }} .
+        docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ NOW }}
     - name: Create function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: 'oci fn function create --application-id ${{ secrets.OCI_APP_OCID }} --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:latest'
+        command: 'oci fn function create --application-id ${{ secrets.OCI_APP_OCID }} --memory-in-mbs 512 --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ NOW }}'
         
