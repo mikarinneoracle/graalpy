@@ -15,10 +15,11 @@ jobs:
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       id: list-functions
       with:
-        command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+        #command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+        command: 'oci os ns get'
     - name: Echo output
       run: |
-        echo "${{ steps.list-functions.outputs.raw_output }}"
+        echo '${{ steps.list-functions.outputs.raw_output }}'
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup GraalVM
