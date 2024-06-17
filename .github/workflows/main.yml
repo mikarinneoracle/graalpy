@@ -5,13 +5,20 @@ jobs:
     runs-on: ubuntu-latest
     #runs-on: self-hosted
     env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+      OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
-    #
-    #- name: List functions
-    #  run: |
-    #    oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }} --auth instance_principal
-    #
+    - name: List functions
+        uses: oracle-actions/run-oci-cli-command@v1.2.0
+        id: list-functions
+        with:
+          command: 'oci fn application list -c ${{ secrets.OCI_FUNC_COMPT }}'
+          silent: false
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup GraalVM
