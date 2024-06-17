@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup GraalVM
+      uses: actions/checkout@v4
       uses: graalvm/setup-graalvm@v1
         with:
           java-version: '21'      # See 'Options' section below for all supported versions
