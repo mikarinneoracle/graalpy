@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Show dir
+      uses: actions/checkout@v4
       run: |
         pwd
         ls
