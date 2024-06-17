@@ -11,6 +11,9 @@ jobs:
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
+    - name: Echo
+      run: |
+        echo "${{ secrets.OCI_FUNC_COMPT }}"
     - name: List functions
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
