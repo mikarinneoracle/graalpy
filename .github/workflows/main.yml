@@ -22,7 +22,7 @@ jobs:
     - name: List functions
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: "oci fn function list --application-id ${{ secrets.OCI_APP_OCID }} | jq '.data[].\"display-name\""
+        command: "oci fn function list --application-id ${{ secrets.OCI_APP_OCID }}"
         silent: false
     - name: Setup GraalVM
       uses: graalvm/setup-graalvm@v1
