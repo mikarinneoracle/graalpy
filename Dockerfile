@@ -1,4 +1,6 @@
-FROM ghcr.io/graalvm/graalvm-ce:ol8-java17-22
+FROM container-registry.oracle.com/os/oraclelinux:8
 
-COPY graalpyfunction graalpyfunction
-CMD ./graalpyfunction
+RUN yum install glibc-devel
+
+#COPY graalpyfunction graalpyfunction
+#CMD ./graalpyfunction
