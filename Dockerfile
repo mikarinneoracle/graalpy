@@ -1,6 +1,4 @@
-FROM container-registry.oracle.com/os/oraclelinux:8
-
-RUN yum install glibc-devel
+FROM ubuntu:latest
 
 COPY graalpyfunction graalpyfunction
 CMD ./graalpyfunction
