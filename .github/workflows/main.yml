@@ -11,7 +11,7 @@ jobs:
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
-      OCI_APP_OCID: ${{ secrets.OCI_APP_OCID }}
+      OCI_FUNC_OCID: ${{ secrets.OCI_FUNC_OCID }}
     steps:
     - name: Set current date as env variable
       run: echo "NOW=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_ENV
@@ -63,6 +63,6 @@ jobs:
     - name: Create function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: "oci fn function update --application-id ${{ secrets.OCI_APP_OCID }} --memory-in-mbs 512 --display-name graalpyfunc --image fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }}"
+        command: "oci fn function update --function-id ${{ secrets.OCI_FUNC_OCID }} --image fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }}"
         silent: false
         
