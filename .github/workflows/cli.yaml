@@ -13,11 +13,11 @@ jobs:
       OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
     steps:
       - name: Get graalpyfunction binary from bucket
-      uses: oracle-actions/run-oci-cli-command@v1.2.0
-      with:
-        command: "oci os object put --bucket-name cache --file graalpyfunction --force"
-        silent: false
+        uses: oracle-actions/run-oci-cli-command@v1.2.0
+        with:
+          command: "oci os object put --bucket-name cache --file graalpyfunction --force"
+          silent: false
       - name: Test the binary
-      run: |
-        chmod +x graalpyfunction
-        ./graalpyfunction
+        run: |
+          chmod +x graalpyfunction
+          ./graalpyfunction
