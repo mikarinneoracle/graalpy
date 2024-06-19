@@ -1,5 +1,4 @@
-#FROM ubuntu:latest
-FROm alpine:3.14
+FROM ubuntu:latest
 
 COPY graalpyfunction graalpyfunction
 CMD ./graalpyfunction

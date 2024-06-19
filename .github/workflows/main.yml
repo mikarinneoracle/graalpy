@@ -56,7 +56,7 @@ jobs:
     - name: Copy binary to bucket
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
-        command: "oci os object put --bucket-name cache --file graalpyfunction"
+        command: "oci os object put --bucket-name cache --file graalpyfunction --force"
         silent: false
     - name: Log into OCIR
       uses: oracle-actions/login-ocir@v1.2.1
