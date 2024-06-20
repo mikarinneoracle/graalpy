@@ -53,6 +53,11 @@ jobs:
         --output graalpyfunction \
         --module src/func.py \
         --venv .
+    - name: Test the binary
+      run: |
+        chmod +x graalpyfunction
+        ./graalpyfunction > out.log
+        echo "$(cat out.log)"
     - name: Copy binary to bucket
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
