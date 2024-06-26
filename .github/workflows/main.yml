@@ -30,7 +30,7 @@ jobs:
         auth_token: ${{ secrets.OCI_AUTH_TOKEN }}
     - name: Build and Push graalpyfunction
       run: |
-        docker build -f Dockerfile-basic -t fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }} .
+        docker build -f Dockerfile -t fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }} .
         docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }}
     - name: Update function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
