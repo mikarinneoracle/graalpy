@@ -24,40 +24,6 @@ jobs:
       with:
         command: "oci fn function list --application-id ${{ secrets.OCI_APP_OCID }}"
         silent: false
-    - name: Setup GraalVM
-      uses: graalvm/setup-graalvm@v1
-      with:
-        java-version: '21'      # See 'Options' section below for all supported versions
-        distribution: 'graalvm' # See 'Options' section below for all available distributions
-        #github-token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Versions
-      run: |
-        echo "GRAALVM_HOME: $GRAALVM_HOME"
-        echo "JAVA_HOME: $JAVA_HOME"
-        java --version
-        native-image --version
-    - name: Setup GraalPy
-      uses: actions/setup-python@v5
-      with:
-        python-version: graalpy24.0
-    - name: Set GraalPy env
-      run: |
-        graalpy -m venv .
-    - name: Activate GraalPy env
-      run: |
-        source ./bin/activate
-        ./bin/pip install -r src/requirements.txt
-    - name: Run GraalPy
-      run: |
-        graalpy -m standalone native \
-        --output graalpyfunction \
-        --module src/func.py \
-        --venv .
-    - name: Copy binary to bucket
-      uses: oracle-actions/run-oci-cli-command@v1.2.0
-      with:
-        command: "oci os object put --bucket-name cache --file graalpyfunction --force"
-        silent: false
     - name: Log into OCIR
       uses: oracle-actions/login-ocir@v1.2.1
       with:
@@ -66,7 +32,7 @@ jobs:
       run: |
         docker build -t fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }} .
         docker push fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }}
-    - name: Create function
+    - name: Update function
       uses: oracle-actions/run-oci-cli-command@v1.2.0
       with:
         command: "oci fn function update --function-id ${{ secrets.OCI_FUNC_OCID }} --image fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }}"

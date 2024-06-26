@@ -1,7 +1,16 @@
-FROM ubuntu:latest
+FROM ghcr.io/graalvm/graalpy-community:24.0.1
 
 EXPOSE 8000
 
-COPY graalpyfunction graalpyfunction
-#CMD ./graalpyfunction handler
-ENTRYPOINT ["./graalpyfunction", "handler"]
+RUN mkdir /function
+WORKDIR /function
+ADD ./func.py /function/
+ADD ./requirements.txt /function/
+
+RUN graalpy -Im ensurepip
+RUN graalpy -m pip install --target /python/  --no-cache --no-cache-dir -r requirements.txt
+
+ENV PYTHONPATH=/function:/python
+
+ADD . /function/
+ENTRYPOINT ["/python/bin/fdk", "/function/func.py", "handler"]
