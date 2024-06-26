@@ -4,8 +4,8 @@ EXPOSE 8000
 
 RUN mkdir /function
 WORKDIR /function
-ADD ./func.py /function/
-ADD ./requirements.txt /function/
+ADD src/func.py /function/
+ADD src/requirements.txt /function/
 
 RUN graalpy -Im ensurepip
 RUN graalpy -m pip install --target /python/  --no-cache --no-cache-dir -r requirements.txt
