@@ -1,4 +1,4 @@
-FROM ghcr.io/graalvm/graalpy-community:24.0.1
+FROM ghcr.io/graalvm/graalpy-community:24.0.1-ol8
 
 EXPOSE 8000
 
