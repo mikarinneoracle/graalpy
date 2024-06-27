@@ -10,7 +10,6 @@ jobs:
       OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
       OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
       OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
-      OCI_FUNC_COMPT: ${{ secrets.OCI_FUNC_COMPT }}
       OCI_FUNC_OCID: ${{ secrets.OCI_FUNC_OCID }}
     steps:
     - name: Set current date as env variable
