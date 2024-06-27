@@ -6,6 +6,7 @@ RUN mkdir /function
 WORKDIR /function
 ADD src/func.py /function/
 ADD src/requirements.txt /function/
+ADD src/unix_events.py /function/
 
 RUN graalpy -Im ensurepip
 RUN graalpy -m pip install --target /python/  --no-cache --no-cache-dir -r requirements.txt
