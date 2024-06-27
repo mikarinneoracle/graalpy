@@ -18,11 +18,6 @@ jobs:
       run: echo ${{ env.NOW }}
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: List functions
-      uses: oracle-actions/run-oci-cli-command@v1.2.0
-      with:
-        command: "oci fn function list --application-id ${{ secrets.OCI_APP_OCID }}"
-        silent: false
     - name: Log into OCIR
       uses: oracle-actions/login-ocir@v1.2.1
       with:
