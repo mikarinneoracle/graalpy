@@ -25,7 +25,7 @@ jobs:
     - name: Build and Push base graalpy image
       run: |
         wget -O Dockerfile.graalpy https://github.com/graalvm/container/raw/master/graalpy-community/Dockerfile.ol8
-        docker build -f Dockerfile.graalpy -t graalpy:24.0.1-ol8 --build-arg GRAALVM_VERSION=24.0.1 --build-arg GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-24.0.1/graalpy-24.0.1-linux-amd64.tar.gz
+        docker build -f Dockerfile.graalpy -t graalpy:24.0.1-ol8 --build-arg GRAALVM_VERSION=24.0.1 --build-arg GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-24.0.1/graalpy-24.0.1-linux-amd64.tar.gz .
     - name: Build and Push graalpyfunction
       run: |
         docker build -f Dockerfile -t fra.ocir.io/frsxwtjslf35/graalpyfunction:${{ env.NOW }} .
