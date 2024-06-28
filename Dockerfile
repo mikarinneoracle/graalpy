@@ -1,4 +1,6 @@
-FROM ghcr.io/graalvm/graalpy-community:24.0.1-ol8
+# FROM ghcr.io/graalvm/graalpy-community:24.0.1-ol8
+# Use the Oracle GraalVM distribution of GraalPy instead of community
+FROM graalpy:24.0.1-ol8
 
 EXPOSE 8000
 
